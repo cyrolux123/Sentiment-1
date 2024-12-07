@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result p {
+            font-size: 18px;
+        }
+        .result .sentiment {
+            font-weight: bold;
+        }
+        .result .probability {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .result .priority {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Nepali Sentiment Analysis</h2>
+
+    <form method="POST" action="/predict">
+        <label for="feature1">Title:</label>
+        <textarea id="feature1" name="feature1" rows="3" required></textarea>
+    
+        <label for="feature2">Body:</label>
+        <textarea id="feature2" name="feature2" rows="6" required></textarea>
+    
+        <button type="submit">Analyze Sentiment</button>
+    </form>
+    
+
+    {% if sentiment %}
+    <div class="result">
+        <p class="probability">Probability of Positive: {{ probabilities['Positive'] }}</p>
+        <p class="probability">Probability of Negative: {{ probabilities['Negative'] }}</p>
+        <p class="priority">Notification Priority: {{ notification_priority }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
